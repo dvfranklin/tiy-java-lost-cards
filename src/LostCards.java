@@ -61,24 +61,29 @@ public class LostCards {
 
         // counter for total number of cards
         int countCards = 0;
+        String suitSymbol = "";
+        String suitText = "";
 
         // loop through suits
         for(int suit=1; suit <= 4; suit++){
 
-            // write out suits to check for length
-            String suitText = "";
+            // write out suits to check for length, assign symbols
             switch(suit){
                 case 1:
                     suitText = "Clubs";
+                    suitSymbol = "♣";
                     break;
                 case 2:
                     suitText = "Diamonds";
+                    suitSymbol = "♢";
                     break;
                 case 3:
                     suitText = "Hearts";
+                    suitSymbol = "♡";
                     break;
                 case 4:
                     suitText = "Spades";
+                    suitSymbol = "♠";
                     break;
             }
 
@@ -86,7 +91,6 @@ public class LostCards {
             for(int num=1; num <= 13; num++){
 
                 String card = "";
-                String suitSymbol = "";
                 boolean isMissing = false;
                 boolean isTorn = false;
                 boolean isDamaged = false;
@@ -108,22 +112,7 @@ public class LostCards {
                     isDown = true;
                 }
 
-                // change suitText to use suit symbols
-                switch(suit){
-                    case 1:
-                        suitSymbol = "♣";
-                        break;
-                    case 2:
-                        suitSymbol = "♢";
-                        break;
-                    case 3:
-                        suitSymbol = "♡";
-                        break;
-                    case 4:
-                        suitSymbol = "♠";
-                        break;
-                }
-
+                // check for card numbers which require special treatment
                 switch(num){
                     case 1:
                         card = "A";
@@ -141,11 +130,12 @@ public class LostCards {
                         card = "K";
                         break;
                     default:
+                        // if card is not a special character, convert int to String
                         Integer cardInt = new Integer(num);
                         card = cardInt.toString();
                 }
 
-                // if card is in the deck, print it out
+                // if card is in the deck, print it out and increase the counter
                 if(!isMissing){
 
                     if(isTorn && isDamaged && isDown){
@@ -179,6 +169,7 @@ public class LostCards {
 
         }
 
+        // how many cards were displayed?
         System.out.println(countCards);
     }
 }
